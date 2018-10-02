@@ -1,0 +1,38 @@
+
+
+entity Cambios {
+	Empresa String	
+}
+
+
+entity Empresa {
+	Nombre String,
+    Pagina String,
+    Whatsaap String,
+	Horario String,
+    Sla String
+}
+
+entity Moneda {
+	TipoMoneda String
+	
+}
+
+relationship OneToOne {
+	Empresa{cambios} to Cambios
+}
+
+relationship OneToMany	 {
+	Cambios{moneda} to Moneda
+}
+
+// Set pagination options
+paginate Empresa, Cambios with infinite-scroll
+paginate Moneda with pagination
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except Empresa, Cambios
+// Set an angular suffix
+angularSuffix * with mySuffix
